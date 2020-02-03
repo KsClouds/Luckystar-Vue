@@ -101,7 +101,9 @@ export default {
 </script>
 
 <style>
-
+#comicList li {
+  margin: 10px;
+}
 .header {
   height: 50px;
   width: 200px;

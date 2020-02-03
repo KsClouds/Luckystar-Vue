@@ -83,6 +83,7 @@
           </li>
           <li>
             <a class="nav-link team" @click='login()'>登录</a>
+            <a class="nav-link team" @click='hideOrShow()'>隐藏</a>
           </li>
         </ul>
       </div>
@@ -165,6 +166,16 @@ export default {
     login () {
       $('#loginDiv').show()
       $('#_overlay_').show()
+    },
+    hideOrShow () {
+      var isShow = $('.content').css('margin-left') !== '0px'
+      if (isShow) {
+        $('.sidebar').hide()
+        $('.content').css('margin-left', '0px')
+      } else {
+        $('.sidebar').show()
+        $('.content').css('margin-left', '200px')
+      }
     }
   }
 }
@@ -201,7 +212,7 @@ export default {
   border-radius: 0.1rem;
 }
 .content.with-sidebar {
-    margin-left: 290px;
+    margin-left: 200px;
 }
 .content {
   position: relative;
