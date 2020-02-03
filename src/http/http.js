@@ -106,7 +106,6 @@ instance.interceptors.request.use(
     console.log('token:' + store.state.token)
     console.log('config')
     console.log(config)
-    debugger
     // console.log('token')
     // console.log(token)
     // config.headers.token = token

@@ -148,7 +148,7 @@ export default {
         pluginModelPath: 'live2d-widget-model-z16/assets/',
         tagMode: false,
         debug: false,
-        model: { jsonPath: '/static/live2dw/live2d-widget-model-z16/assets/z16.model.json' },
+        model: { jsonPath: './static/live2dw/live2d-widget-model-z16/assets/z16.model.json' },
         display: { position: 'right', width: 200, height: 380 },
         mobile: { show: true },
         log: false
