@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div id='doupolist'>
+    <div id='comicList'>
+      <ul>
+        <li @click="chooseComic('DouPoCangQiong')">斗破苍穹</li>
+        <li @click="chooseComic('WuDongQianKun')">武动乾坤</li>
+        <li @click="chooseComic('DaZhuZai')">大主宰</li>
+      </ul>
+    </div>
+    <div id='chapterList' style="display: none;">
       <div>斗破苍穹</div>
       <div>目录</div>
       <ul>
@@ -9,7 +16,7 @@
         </li>
       </ul>
     </div>
-    <div id='doupochapter' style="display: none;">
+    <div id='chapter' style="display: none;">
       <div class='header'>
         <a @click='beforeChapter()'>上一话（快捷键←）</a><br>
         <a @click='afterChapter()'>下一话（快捷键→）</a>
@@ -28,6 +35,7 @@ export default {
   name: 'Doupo',
   data () {
     return {
+      comic: null,
       chapters: [],
       chapterImgs: [],
       curChapter: 0
@@ -35,14 +43,6 @@ export default {
   },
   created () {
     let _this = this
-    _this.$api.star.qryDoupoChapter().then(res => {
-      if (res == null) {
-        alert('查询失败')
-      }
-      console.log(res.data)
-      _this._self.chapters = res.data
-    })
-
     document.onkeydown = function (e) {
       // 事件对象兼容
       let e1 = e || event || window.event
@@ -55,12 +55,25 @@ export default {
     }
   },
   methods: {
+    chooseComic (comic) {
+      let _this = this
+      _this._self.comic = comic
+      _this.$api.star.qryChapter(comic).then(res => {
+        if (res == null) {
+          alert('查询失败')
+        }
+        console.log(res.data)
+        _this._self.chapters = res.data
+        $('#comicList').hide()
+        $('#chapterList').show()
+      })
+    },
     openChapter (chapterId) {
       let _this = this
       _this._self.curChapter = chapterId
-      $('#doupolist').hide()
-      $('#doupochapter').show()
-      _this.$api.star.qryDoupoChapterImages(chapterId).then(res => {
+      $('#chapterList').hide()
+      $('#chapter').show()
+      _this.$api.star.qryChapterImages(_this._self.comic, chapterId).then(res => {
         _this._self.chapterImgs = res.data.data
         console.log(_this._self.chapterImgs)
       })
@@ -68,7 +81,7 @@ export default {
     beforeChapter () {
       let _this = this
       var curChapterId = _this._self.curChapter
-      _this.$api.star.qryDoupoChapterImagesBefore(curChapterId).then(res => {
+      _this.$api.star.qryChapterImagesBefore(_this._self.comic, curChapterId).then(res => {
         _this._self.chapterImgs = res.data.data
         this._self.curChapter = res.data.chapterId
       })
@@ -77,7 +90,7 @@ export default {
     afterChapter () {
       let _this = this
       var curChapterId = _this._self.curChapter
-      _this.$api.star.qryDoupoChapterImagesAfter(curChapterId).then(res => {
+      _this.$api.star.qryChapterImagesAfter(_this._self.comic, curChapterId).then(res => {
         _this._self.chapterImgs = res.data.data
         this._self.curChapter = res.data.chapterId
       })

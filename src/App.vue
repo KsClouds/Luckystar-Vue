@@ -109,7 +109,7 @@
                   <router-link to="Star" >我的收藏</router-link>
                 </li>
                 <li>
-                  <router-link to="Doupo" >斗破苍穹</router-link>
+                  <router-link to="Doupo" >漫画</router-link>
                 </li>
                 <li><h3>💻CRM</h3></li>
                 <li>

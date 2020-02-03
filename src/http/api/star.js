@@ -7,17 +7,17 @@ const star = {
   qryUpdateChapter () {
     return axios.get(`${base.luckyStar}/qryUpdateChapter`)
   },
-  qryDoupoChapter () {
-    return axios.get(`${base.luckyStar}/qryDoupoChapter`)
+  qryChapter (comic) {
+    return axios.get(`${base.luckyStar}/qryChapter?comic=${comic}`)
   },
-  qryDoupoChapterImages (chapterId) {
-    return axios.get(`${base.luckyStar}/qryDoupoChapterImages?chapterId=${chapterId}`)
+  qryChapterImages (comic, chapterId) {
+    return axios.get(`${base.luckyStar}/qryChapterImages?comic=${comic}&chapterId=${chapterId}`)
   },
-  qryDoupoChapterImagesBefore (chapterId) {
-    return axios.get(`${base.luckyStar}/qryDoupoChapterImagesBefore?chapterId=${chapterId}`)
+  qryChapterImagesBefore (comic, chapterId) {
+    return axios.get(`${base.luckyStar}/qryChapterImagesBefore?comic=${comic}&chapterId=${chapterId}`)
   },
-  qryDoupoChapterImagesAfter (chapterId) {
-    return axios.get(`${base.luckyStar}/qryDoupoChapterImagesAfter?chapterId=${chapterId}`)
+  qryChapterImagesAfter (comic, chapterId) {
+    return axios.get(`${base.luckyStar}/qryChapterImagesAfter?comic=${comic}&chapterId=${chapterId}`)
   }
 }
 
