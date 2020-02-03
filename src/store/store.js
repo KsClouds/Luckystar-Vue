@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const state = { // 全局管理的数据存储
   isLogin: '0',
   ser: null,
-  token: localStorage.getItem('token') ? localStorage.getItem('token') : '' // token
+  token: document.cookie ? localStorage.token : '' // token
 }
 
 export default new Vuex.Store({
@@ -25,8 +25,9 @@ export default new Vuex.Store({
       localStorage.setItem('token', value)
       console.log(state)
       console.log(value)
+      document.cookie = value
     },
-    $_removeStorage (state, value) { // 删除token
+    $_removeStorage (state) { // 删除token
       localStorage.removeItem('token')
     }
   }

@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import HelloWorld from '../components/HelloWorld.vue'
 import QRCode from '@/components/QRCode'
 import Star from '@/components/Star'
+import Doupo from '@/components/Doupo'
+import Encrypt from '@/components/Encrypt'
 
 Vue.use(Router)
 
@@ -13,7 +15,7 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Star
+      component: HelloWorld
     },
     {
       path: '/QRCode',
@@ -27,6 +29,24 @@ const router = new Router({
       path: '/HelloWorld',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/Star',
+      name: 'Star',
+      component: Star,
+      meta: {
+        requireAuth: true
+      }
+    },
+    {
+      path: '/Doupo',
+      name: 'Doupo',
+      component: Doupo
+    },
+    {
+      path: '/Encrypt',
+      name: 'Encrypt',
+      component: Encrypt
     }
   ]
 })

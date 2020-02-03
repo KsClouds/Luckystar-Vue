@@ -27,19 +27,14 @@ export default {
         this.kPopup('未输入内容')
         return
       }
-      this.$http.get(process.env.ARIPORT_ROOT + '/GetQRCode?msg=' + msg)
-        .then(function (response) {
-          var data = response.data
-          if (data.code === 0) {
-            var image = 'data:image/png;base64,' + response.data.data
-            $('#QRCodeImg').attr('src', image)
-          } else {
-            alert('生成失败')
-          }
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      this.$api.qrcode.getQRCode(msg).then(res => {
+        // if (res.code === 0) {
+        var image = 'data:image/png;base64,' + res
+        $('#QRCodeImg').attr('src', image)
+        // } else {
+        //   alert(res.msg)
+        // }
+      })
     }
   }
 }
