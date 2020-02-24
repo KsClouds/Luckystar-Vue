@@ -1,89 +1,22 @@
 <template>
   <div id="app">
-    <div id="loginDiv" data-milodialog="1" role="dialog" tabindex="-1" style="height: 368px; width: 622px; border: 0px; padding: 0px; margin: -184px 0px 0px -311px; position: fixed; z-index: 100002; top: 50%; left: 50%; display: none; visibility: visible;" class="">
-      <!-- <iframe id="loginIframe" name="loginIframe" scrolling="no" width="100%" height="100%" frameborder="0" src="http://www.baidu.com" class=""> -->
-        <login></login>
-      <!-- </iframe> -->
+    <div id="loginDiv" data-milodialog="1" role="dialog" tabindex="-1">
+      <login></login>
     </div>
     <!-- content -->
     <div>
       <div id="mobile-bar">
-        <a class="menu-button"></a>
-        <a class="logo" href="/"></a>
+        <a class="menu-button" @click="showMenu()"></a>
+        <a class="login" @click="login()"></a>
       </div>
       <div id="header">
-        <a id="logo" href="/">
+        <a id="logo" @click='hideOrShow()'>
           <img src="./assets/amy.gif">
-          <!-- <span>KのTools</span> -->
           <span>Luckystar</span>
         </a>
         <ul id="nav">
           <li>
-            <form id="search-form">
-              <input placeholder="暂无该功能" type="text" id="search-query-nav" class="search-query st-default-search-input aa-input" aria-label="搜索" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="">
-              <pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Arial; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre>
-            </form>
-          </li>
-          <li class="nav-dropdown-container learn">
-            <a class="nav-link current">学习</a><span class="arrow"></span>
-              <ul class="nav-dropdown">
-                <li><h4>文档</h4></li>
-                <li>
-                  <ul>
-                    <li><a href="/v2/guide/" class="nav-link current">教程</a></li>
-                    <li><a href="/v2/api/" class="nav-link">API</a></li>
-                    <li><a href="/v2/style-guide/" class="nav-link">风格指南</a></li>
-                    <li><a href="/v2/examples/" class="nav-link">示例</a></li>
-                    <li><a href="/v2/cookbook/" class="nav-link">Cookbook</a></li>
-                  </ul>
-                </li>
-              <li><h4>视频教程</h4></li>
-              <li>
-                <ul>
-                  <li><a href="https://www.vuemastery.com/courses/" class="nav-link" target="_blank" rel="sponsored noopener">Vue Mastery (英文)</a></li>
-                  <li><a href="https://vueschool.io/?friend=vuejs&amp;utm_source=Vuejs.org&amp;utm_medium=Link&amp;utm_content=Navbar%20Dropdown" class="nav-link" target="_blank" rel="noopener">Vue School (英文)</a></li>
-                  <li><a href="https://learning.dcloud.io/" class="nav-link" target="_blank" rel="sponsored noopener">DCloud 视频教程</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-dropdown-container ecosystem">
-            <a class="nav-link">生态系统</a><span class="arrow"></span>
-            <ul class="nav-dropdown">
-              <li><h4>帮助</h4></li>
-              <li><ul>
-                <li><a href="https://forum.vuejs.org/" class="nav-link" target="_blank" rel="noopener">论坛</a></li>
-                <li><a href="https://chat.vuejs.org/" class="nav-link" target="_blank" rel="noopener">聊天室</a></li>
-                <li><a href="https://events.vuejs.org/meetups/" class="nav-link" target="_blank" rel="noopener">聚会</a></li>
-              </ul></li>
-              <li><h4>工具</h4></li>
-              <li>
-                <ul>
-                  <li><a href="https://github.com/vuejs/vue-devtools" class="nav-link" target="_blank" rel="noopener">Devtools</a></li>
-                  <li><a href="https://cli.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue CLI</a></li>
-                  <li><a href="https://vue-loader.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue Loader</a></li>
-                </ul>
-              </li>
-              <li><h4>核心插件</h4></li>
-              <li><ul>
-                <li><a href="https://router.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue Router</a></li>
-                <li><a href="https://vuex.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vuex</a></li>
-                <li><a href="https://ssr.vuejs.org/zh/" class="nav-link" target="_blank" rel="noopener">Vue 服务端渲染</a></li>
-              </ul></li>
-              <li><h4>信息</h4></li>
-              <li><ul>
-                <li><a href="https://news.vuejs.org" class="nav-link" target="_blank" rel="noopener">周刊</a></li>
-                <li><a href="https://github.com/vuejs/vue/projects/6" class="nav-link" target="_blank" rel="noopener">Roadmap</a></li>
-                <li><a href="https://events.vuejs.org/" class="nav-link" target="_blank" rel="noopener">活动</a></li>
-                <li><a href="https://twitter.com/vuejs" class="nav-link" target="_blank" rel="noopener">Twitter</a></li>
-                <li><a href="https://medium.com/the-vue-point" class="nav-link" target="_blank" rel="noopener">博客</a></li>
-                <li><a href="https://vuejobs.com/?ref=vuejs" class="nav-link" target="_blank" rel="noopener">工作</a></li>
-              </ul></li>
-            </ul>
-          </li>
-          <li>
             <a class="nav-link team" @click='login()'>登录</a>
-            <a class="nav-link team" @click='hideOrShow()'>隐藏</a>
           </li>
         </ul>
       </div>
@@ -92,28 +25,27 @@
         <!-- left start -->
         <div class="sidebar">
           <div class="sidebar-inner">
-            <div class="list">
-              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=0&id=3112901650&auto=0&height=32"></iframe>
+            <div class="menu-list">
               <h2>
-                ⭐幸运星
+                ⭐幸运星&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </h2>
               <ul class="menu-root">
                 <li><h3>🔧工具</h3></li>
                 <li>
                   <router-link to="HelloWorld" >HelloWorld</router-link>
                 </li>
-                <li>
+                <li @click="showMenu()">
                   <router-link to="QRCode" >生成二维码</router-link>
                 </li>
                 <li><h3>🐋娱乐</h3></li>
-                <li>
+                <li @click="showMenu()">
                   <router-link to="Star" >我的收藏</router-link>
                 </li>
-                <li>
+                <li @click="showMenu()">
                   <router-link to="Doupo" >漫画</router-link>
                 </li>
                 <li><h3>💻CRM</h3></li>
-                <li>
+                <li @click="showMenu()">
                   <router-link to="Encrypt">加解密</router-link>
                 </li>
               </ul>
@@ -151,7 +83,7 @@ export default {
         debug: false,
         model: { jsonPath: './static/live2dw/live2d-widget-model-z16/assets/z16.model.json' },
         display: { position: 'right', width: 200, height: 380 },
-        mobile: { show: true },
+        mobile: { show: false },
         log: false
       })
     }, 1000)
@@ -176,6 +108,14 @@ export default {
         $('.sidebar').show()
         $('.content').css('margin-left', '200px')
       }
+    },
+    showMenu () {
+      var sidebar = $('.sidebar')
+      if (sidebar.hasClass('open')) {
+        sidebar.removeClass('open')
+      } else {
+        sidebar.addClass('open')
+      }
     }
   }
 }
@@ -186,7 +126,7 @@ export default {
   display: none;
   background-color:
   rgb(0, 0, 0);
-  position: absolute;
+  position: fixed;
   height: 100%;
   z-index: 10001;
   width: 100%;
@@ -217,15 +157,12 @@ export default {
 .content {
   position: relative;
   padding: 35px 0;
-  /* max-width: 700px; */
+  max-width: 700px;
   margin: 0 auto;
   padding-left: 50px;
-  /* border: 2px; */
-  /* border-style:solid; */
-  /* border-color:#000000; */
 }
 
-/* sidebar */
+/* sidebar start */
 .sidebar {
   position: fixed;
   z-index: 10;
@@ -263,11 +200,11 @@ export default {
 #main.fix-sidebar {
   position: static;
 }
-/* sidebar */
+/* sidebar end */
 #main {
     position: relative;
     z-index: 1;
-    padding: 0 60px 30px;
+    /* padding: 0 60px 30px; */
     overflow-x: hidden;
 }
 body #header {
@@ -278,7 +215,6 @@ body #header {
 #header {
   background-color: #fff;
   height: 40px;
-  /* padding: 10px 60px; */
   padding: 10px;
   position: relative;
   z-index: 20;
@@ -393,22 +329,101 @@ a {
   width: 40px;
   height: 40px;
 }
-.search-query {
-  height: 30px;
-  line-height: 30px;
-  box-sizing: border-box;
-  padding: 0 15px 0 30px;
-  border: 1px solid #e3e3e3;
-  color: #273849;
-  outline: none;
-  border-radius: 15px;
-  margin-right: 10px;
-  transition: border-color 0.2s ease;
-  background: #fff url(./assets/search.png) 8px 5px no-repeat;
-  background-size: 20px;
-  vertical-align: middle !important;
-}
 img {
   border: none;
+}
+#loginDiv {
+  height: 368px;
+  width: 622px;
+  max-width: 90%;
+  border: 0px;
+  position: fixed;
+  z-index: 100002;
+  display: none;
+  visibility: visible;
+  justify-content: center;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+#mobile-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+  z-index: 20;
+  display: none;
+  box-shadow: 0 0 2px rgba(0,0,0,0.25);
+}
+#mobile-bar .menu-button {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 8px;
+  left: 12px;
+  background: url(../static/img/menu.png) center center no-repeat;
+  background-size: 24px;
+}
+#mobile-bar .login {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 8px;
+  right: 12px;
+  background: url(../static/img/login.png) center center no-repeat;
+  background-size: 24px;
+}
+body.docs {
+  padding-top: 61px;
+}
+@media screen and (max-width: 600px) {
+  #header {
+    display: none;
+  }
+  #mobile-bar {
+    display: block;
+  }
+  .sidebar.open {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  .sidebar {
+      position: fixed;
+      background-color: #f9f9f9;
+      height: 100%;
+      top: 0;
+      left: 0;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
+      -webkit-transform: translate(-280px, 0);
+      transform: translate(-380px, 0);
+  }
+  .sidebar .sidebar-inner {
+      padding: 60px 10px 30px 20px;
+      box-sizing: border-box;
+  }
+  .content {
+      padding-left: 0;
+  }
+  .content.with-sidebar {
+      margin: auto;
+  }
+  #main {
+      /* padding: 2em 1.4em 0; */
+  }
+  body.docs {
+      padding-top: 0;
+  }
+  body {
+      -webkit-text-size-adjust: none;
+      font-size: 14px;
+  }
+  #loginDiv {
+    top: 50px;
+    bottom: 50px;
+    height: 100%;
+  }
 }
 </style>

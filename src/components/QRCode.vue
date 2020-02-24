@@ -28,12 +28,12 @@ export default {
         return
       }
       this.$api.qrcode.getQRCode(msg).then(res => {
-        // if (res.code === 0) {
-        var image = 'data:image/png;base64,' + res
-        $('#QRCodeImg').attr('src', image)
-        // } else {
-        //   alert(res.msg)
-        // }
+        if (res.code === 0) {
+          var image = 'data:image/png;base64,' + res.data
+          $('#QRCodeImg').attr('src', image)
+        } else {
+          alert(res.msg)
+        }
       })
     }
   }

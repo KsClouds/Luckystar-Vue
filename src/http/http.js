@@ -103,9 +103,6 @@ instance.interceptors.request.use(
     // const token = store.state.token
     // token && (config.headers.token = token)
     config.headers.common['token'] = store.state.token
-    console.log('token:' + store.state.token)
-    console.log('config')
-    console.log(config)
     // console.log('token')
     // console.log(token)
     // config.headers.token = token

@@ -3,21 +3,29 @@ import axios from '../http' // 导入http中创建的axios实例
 // import qs from 'qs' // 根据需求是否导入qs模块
 
 const star = {
-  // 新闻列表
+  searchComic (comicName) {
+    return axios.get(`${base.luckyStar}/searchComic?comicName=${comicName}`)
+  },
+  starComic (comicId, comicName, starSource, starSourceCode) {
+    return axios.get(`${base.luckyStar}/starComic?comicId=${comicId}&comicName=${comicName}&starSource=${starSource}&starSourceCode=${starSourceCode}`)
+  },
+  qryStars () {
+    return axios.get(`${base.luckyStar}/qryStars`)
+  },
   qryUpdateChapter () {
     return axios.get(`${base.luckyStar}/qryUpdateChapter`)
   },
-  qryChapter (comic) {
-    return axios.get(`${base.luckyStar}/qryChapter?comic=${comic}`)
+  qryChapter (comicId, starSourceCode) {
+    return axios.get(`${base.luckyStar}/qryChapter?comicId=${comicId}&starSourceCode=${starSourceCode}`)
   },
-  qryChapterImages (comic, chapterId) {
-    return axios.get(`${base.luckyStar}/qryChapterImages?comic=${comic}&chapterId=${chapterId}`)
+  qryChapterImages (comicId, chapterId, starSourceCode) {
+    return axios.get(`${base.luckyStar}/qryChapterImages?comicId=${comicId}&chapterId=${chapterId}&starSourceCode=${starSourceCode}`)
   },
-  qryChapterImagesBefore (comic, chapterId) {
-    return axios.get(`${base.luckyStar}/qryChapterImagesBefore?comic=${comic}&chapterId=${chapterId}`)
+  qryChapterImagesBefore (comicId, chapterId, starSourceCode) {
+    return axios.get(`${base.luckyStar}/qryChapterImagesBefore?comicId=${comicId}&chapterId=${chapterId}&starSourceCode=${starSourceCode}`)
   },
-  qryChapterImagesAfter (comic, chapterId) {
-    return axios.get(`${base.luckyStar}/qryChapterImagesAfter?comic=${comic}&chapterId=${chapterId}`)
+  qryChapterImagesAfter (comicId, chapterId, starSourceCode) {
+    return axios.get(`${base.luckyStar}/qryChapterImagesAfter?comicId=${comicId}&chapterId=${chapterId}&starSourceCode=${starSourceCode}`)
   }
 }
 
