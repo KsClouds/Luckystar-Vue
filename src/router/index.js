@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '../components/HelloWorld.vue'
+import Tip from '../components/Tip.vue'
 import QRCode from '@/components/QRCode'
 import Star from '@/components/Star'
 import Doupo from '@/components/Doupo'
 import Encrypt from '@/components/Encrypt'
+import Animation from '@/components/Animation'
+import StudyMaterial from '@/components/StudyMaterial'
 
 Vue.use(Router)
 
@@ -15,7 +17,7 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: HelloWorld
+      component: Tip
     },
     {
       path: '/QRCode',
@@ -26,9 +28,9 @@ const router = new Router({
       }
     },
     {
-      path: '/HelloWorld',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '/Tip',
+      name: 'Tip',
+      component: Tip
     },
     {
       path: '/Star',
@@ -47,6 +49,19 @@ const router = new Router({
       path: '/Encrypt',
       name: 'Encrypt',
       component: Encrypt
+    },
+    {
+      path: '/Animation',
+      name: 'Animation',
+      component: Animation
+    },
+    {
+      path: '/StudyMaterial',
+      name: 'StudyMaterial',
+      component: StudyMaterial,
+      meta: {
+        requireAuth: true
+      }
     }
   ]
 })

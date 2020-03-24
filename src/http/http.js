@@ -6,6 +6,7 @@ import axios from 'axios'
 import router from '../router'
 import store from '../store/store'
 import { Toast } from 'vant'
+import $ from 'jquery'
 
 /**
  * 提示函数
@@ -84,7 +85,7 @@ const errorHandle = (status, other) => {
 
 // 创建axios实例
 var instance = axios.create({
-  timeout: 1000 * 12
+  timeout: 1000 * 30
 })
 
 instance.defaults.headers.common['Authentication-Token'] = store.state.token
@@ -102,9 +103,8 @@ instance.interceptors.request.use(
   config => {
     // const token = store.state.token
     // token && (config.headers.token = token)
+    $('#loading').addClass('loading')
     config.headers.common['token'] = store.state.token
-    // console.log('token')
-    // console.log(token)
     // config.headers.token = token
     return config
   },
@@ -114,9 +114,13 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   // 请求成功
-  res => res.status === 200 ? Promise.resolve(res.data) : Promise.reject(res),
+  res => {
+    $('#loading').removeClass('loading')
+    return res.status === 200 ? Promise.resolve(res.data) : Promise.reject(res)
+  },
   // 请求失败
   error => {
+    $('#loading').removeClass('loading')
     const { response } = error
     if (response) {
       // 请求已发出，但是不在2xx的范围
@@ -128,6 +132,10 @@ instance.interceptors.response.use(
       // network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
       // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
       store.commit('changeNetwork', false)
+      var res = {
+        msg: '请求超时，请重试'
+      }
+      return Promise.resolve(res)
     }
   })
 

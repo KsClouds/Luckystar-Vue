@@ -1,18 +1,19 @@
 <template>
   <div id="app">
-    <div id="loginDiv" data-milodialog="1" role="dialog" tabindex="-1">
+    <div id="loginDiv" data-milodialog="1" role="dialog" tabindex="-1" @mousewheel.prevent @touchmove.prevent>
       <login></login>
     </div>
     <!-- content -->
     <div>
       <div id="mobile-bar">
         <a class="menu-button" @click="showMenu()"></a>
+        <a class="mobile-title">らき☆すた</a>
         <a class="login" @click="login()"></a>
       </div>
       <div id="header">
         <a id="logo" @click='hideOrShow()'>
           <img src="./assets/amy.gif">
-          <span>Luckystar</span>
+          <span>らき☆すた</span>
         </a>
         <ul id="nav">
           <li>
@@ -31,11 +32,14 @@
               </h2>
               <ul class="menu-root">
                 <li><h3>🔧工具</h3></li>
-                <li>
-                  <router-link to="HelloWorld" >HelloWorld</router-link>
+                <li @click="showMenu()">
+                  <router-link to="Tip" >Tips</router-link>
                 </li>
                 <li @click="showMenu()">
                   <router-link to="QRCode" >生成二维码</router-link>
+                </li>
+                <li @click="showMenu()">
+                  <router-link to="StudyMaterial" >学习资料</router-link>
                 </li>
                 <li><h3>🐋娱乐</h3></li>
                 <li @click="showMenu()">
@@ -43,6 +47,9 @@
                 </li>
                 <li @click="showMenu()">
                   <router-link to="Doupo" >漫画</router-link>
+                </li>
+                <li @click="showMenu()">
+                  <router-link to="Animation">动画</router-link>
                 </li>
                 <li><h3>💻CRM</h3></li>
                 <li @click="showMenu()">
@@ -60,7 +67,10 @@
         <!-- right end -->
       </div>
       <!-- main page end -->
-      <div id="_overlay_" style=""></div>
+      <div id="_overlay_" @mousewheel.prevent @touchmove.prevent></div>
+      <div id="loading" @mousewheel.prevent @touchmove.prevent>
+        <img src="../static/img/loading.gif">
+      </div>
     </div>
     <!-- content -->
   </div>
@@ -122,10 +132,43 @@ export default {
 </script>
 
 <style>
+.mobile-title {
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  top: 5px;
+  left: 50%;
+  margin-left: -50px;
+  background-size: 30px;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+#loading {
+  height: 100%;
+  width: 100%;
+  z-index: 10002;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.7;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  -webkit-transform: translate(0, -100%);
+  transform: translate(0, -100%);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
+}
+#loading.loading {
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
 #_overlay_ {
   display: none;
-  background-color:
-  rgb(0, 0, 0);
+  background-color: rgb(0, 0, 0);
   position: fixed;
   height: 100%;
   z-index: 10001;
@@ -397,7 +440,7 @@ body.docs {
       left: 0;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       transition: all 0.4s cubic-bezier(0.4, 0, 0, 1);
-      -webkit-transform: translate(-280px, 0);
+      -webkit-transform: translate(-380px, 0);
       transform: translate(-380px, 0);
   }
   .sidebar .sidebar-inner {

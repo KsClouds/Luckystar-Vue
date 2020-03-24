@@ -19,7 +19,6 @@
 </template>
 
 <script>
-// import doecrypt from '../../static/js/encrypt/encrypt.js'
 import $ from 'jquery'
 import cryptoJs from 'crypto-js'
 let keyOne = 'iamasiainfocoder'
@@ -34,14 +33,12 @@ export default {
       if (typeof word === 'string') {
         word = cryptoJs.enc.Utf8.parse(word)
         enc = cryptoJs.AES.encrypt(word, key, {
-          // iv: iv
           mode: cryptoJs.mode.ECB,
           padding: cryptoJs.pad.Pkcs7
         })
       } else if (typeof word === 'object') {
         let data = JSON.stringify(word)
         enc = cryptoJs.AES.encrypt(data, key, {
-          // iv: iv
           mode: cryptoJs.mode.ECB,
           padding: cryptoJs.pad.Pkcs7
         })
@@ -56,7 +53,6 @@ export default {
       }
       let key = cryptoJs.enc.Utf8.parse(keyOne)
       let dec = cryptoJs.AES.decrypt(word, key, {
-        // vi: vi
         mode: cryptoJs.mode.ECB,
         padding: cryptoJs.pad.Pkcs7
       })

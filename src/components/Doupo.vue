@@ -33,18 +33,19 @@
     </div>
     <div id='chapter' style="display: none;">
       <div id="mask" style="display: none;">
-        <div class="left_comic_mask comic_mask" @click="beforeChapter()">
+        <div class="left_comic_mask comic_mask" @click="beforeChapter()" @mousewheel.prevent @touchmove.prevent>
           <p class="comic_btn">上<br>一<br>话<br><br>快<br>捷<br>键<br>←</p>
         </div>
-        <div class="middle_comic_mask comic_mask" @click="hideMask()">
+        <div class="middle_comic_mask comic_mask" @click="hideMask()" @mousewheel.prevent @touchmove.prevent>
           <p class="comic_btn">继<br>续<br>观<br>看</p>
         </div>
-        <div class="right_comic_mask comic_mask" @click="afterChapter()">
+        <div class="right_comic_mask comic_mask" @click="afterChapter()" @mousewheel.prevent @touchmove.prevent>
           <p class="comic_btn">下<br>一<br>话<br><br>快<br>捷<br>键<br>→</p>
         </div>
       </div>
       <div v-for="chapterImg in chapterImgs" :key="chapterImg.id">
-        <img :src="chapterImg.src" @click="showMask()">
+        <img :src="chapterImg.src" @click="showMask()" @load="showImg(chapterImg.id)" style="display: none;" :id="chapterImg.id" class="comic-img">
+        <img src="/static/img/load-img.gif" @click="showMask()" :id="chapterImg.id+'load'" class="load-img">
       </div>
     </div>
   </div>
@@ -70,8 +71,14 @@ export default {
   created () {
     let _this = this
     _this.$api.star.qryStars().then(res => {
-      if (res && res.code === 0) {
+      if (res === null) {
+        _this.kPopup('请求失败')
+        return
+      }
+      if (res.code === 0) {
         _this._self.stars = res.data
+      } else {
+        _this.kPopup(res.msg)
       }
     })
     document.onkeydown = function (e) {
@@ -91,7 +98,7 @@ export default {
       var comicName = $('#comicSearch').val()
       _this.$api.star.searchComic(comicName).then(res => {
         if (res.code === 0) {
-          _this._self.searchComics = res.data
+          _this.searchComics = res.data
         } else {
           alert(res.msg)
         }
@@ -115,49 +122,54 @@ export default {
         return
       }
       _this.comic = comicId
-      _this._self.curChapter = chapterId
+      _this.curChapter = chapterId
       _this.starSourceCode = starSourceCode
       _this.$api.star.qryChapterImages(comicId, chapterId, starSourceCode).then(res => {
-        _this.chapterImgs = res.data.data
+        if (res.code === 0) {
+          _this.chapterImgs = res.data.data
+          $('#comicList').hide()
+          $('#chapter').show()
+        } else {
+          _this.kPopup(res.msg)
+        }
       })
-      $('#comicList').hide()
-      $('#chapter').show()
     },
     chooseComic (comic, starSourceCode) {
       let _this = this
-      _this._self.comic = comic
+      _this.comic = comic
       _this.starSourceCode = starSourceCode
       _this.$api.star.qryChapter(comic, starSourceCode).then(res => {
         if (res == null) {
           alert('查询失败')
           return
         }
-        _this._self.chapters = res.data
+        _this.chapters = res.data
         $('#comicList').hide()
         $('#chapterList').show()
       })
     },
     openChapter (chapterId) {
       let _this = this
-      _this._self.curChapter = chapterId
-      _this.$api.star.qryChapterImages(_this._self.comic, chapterId, _this.starSourceCode).then(res => {
-        console.log(res)
+      _this.curChapter = chapterId
+      _this.$api.star.qryChapterImages(_this.comic, chapterId, _this.starSourceCode).then(res => {
         if (res.code === 0) {
-          _this._self.chapterImgs = res.data.data
+          _this.chapterImgs = res.data.data
           $('#chapterList').hide()
           $('#chapter').show()
         } else {
-          alert(res.msg)
+          _this.kPopup(res.msg)
         }
       })
     },
     beforeChapter () {
       let _this = this
-      var curChapterId = _this._self.curChapter
-      _this.$api.star.qryChapterImagesBefore(_this._self.comic, curChapterId, _this.starSourceCode).then(res => {
+      var curChapterId = _this.curChapter
+      _this.$api.star.qryChapterImagesBefore(_this.comic, curChapterId, _this.starSourceCode).then(res => {
         if (res.code === 0) {
-          _this._self.chapterImgs = res.data.data
-          _this._self.curChapter = res.data.chapterId
+          $('.comic-img').hide()
+          $('.load-img').show()
+          _this.chapterImgs = res.data.data
+          _this.curChapter = res.data.chapterId
           document.scrollingElement.scrollTop = 0
         } else {
           _this.kPopup(res.msg)
@@ -167,11 +179,14 @@ export default {
     },
     afterChapter () {
       let _this = this
-      var curChapterId = _this._self.curChapter
-      _this.$api.star.qryChapterImagesAfter(_this._self.comic, curChapterId, _this.starSourceCode).then(res => {
+      var curChapterId = _this.curChapter
+      _this.$api.star.qryChapterImagesAfter(_this.comic, curChapterId, _this.starSourceCode).then(res => {
         if (res.code === 0) {
-          _this._self.chapterImgs = res.data.data
-          _this._self.curChapter = res.data.chapterId
+          $('.comic-img').hide()
+          $('.load-img').show()
+          _this.chapterImgs = []
+          _this.chapterImgs = res.data.data
+          _this.curChapter = res.data.chapterId
           document.scrollingElement.scrollTop = 0
         } else {
           _this.kPopup(res.msg)
@@ -182,15 +197,20 @@ export default {
     showMask () {
       var _this = this
       var nowTime = new Date().getTime()
-      if (nowTime - _this._self.lastClickTime < 400) {
-        _this._self.lastClickTime = 0
+      if (nowTime - _this.lastClickTime < 400) {
+        _this.lastClickTime = 0
         $('#mask').show()
       } else {
-        _this._self.lastClickTime = nowTime
+        _this.lastClickTime = nowTime
       }
     },
     hideMask () {
       $('#mask').hide()
+    },
+    showImg (id) {
+      console.log(id)
+      $('#' + id).show()
+      $('#' + id + 'load').hide()
     }
   }
 }
@@ -304,22 +324,6 @@ hr {
   -webkit-box-orient: horizontal;
   -webkit-box-pack: center;
   -webkit-box-align: center;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-pack: center;
-  -moz-box-align: center;
-  display: -o-box;
-  -o-box-orient: horizontal;
-  -o-box-pack: center;
-  -o-box-align: center;
-  display: -ms-box;
-  -ms-box-orient: horizontal;
-  -ms-box-pack: center;
-  -ms-box-align: center;
-  display: box;
-  box-orient: horizontal;
-  box-pack: center;
-  box-align: center;
 }
 .comic_btn {
   color: #FFFFFF;

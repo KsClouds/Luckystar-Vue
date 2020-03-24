@@ -6,12 +6,15 @@ import article from '@/http/api/article'
 import login from '@/http/api/login'
 import star from '@/http/api/star'
 import qrcode from '@/http/api/qrcode'
-// 其他模块的接口……
+import animation from '@/http/api/animation'
+import studyMaterial from '@/http/api/studyMaterial'
 
 // 导出接口
 export default {
   article,
   login,
   star,
-  qrcode
+  qrcode,
+  animation,
+  studyMaterial
 }
