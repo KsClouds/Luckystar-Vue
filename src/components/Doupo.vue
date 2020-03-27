@@ -12,11 +12,11 @@
       </ul>
       <hr/>
       <h4>漫画搜索（点击封面即可收藏/取消收藏）</h4>
-      <input id="comicSearch" type="text" class="search-query" style="width: 90%; margin-bottom: 15px;" @keyup.enter="searchComic">
+      <label><input id="comicSearch" type="text" class="search-query" style="width: 90%; margin-bottom: 15px;" @keyup.enter="searchComic" placeholder="输入漫画名"></label>
       <div class="search-comic-list">
         <div v-for="sc in searchComics" :key="sc.comicId" class="common-comic-item">
           <a class="cover" @click="starComic(sc.comicId, sc.name, sc.starSource, sc.starSourceCode)">
-            <img :src=sc.src>
+            <img :src=sc.src alt="封面加载失败">
           </a>
           <p class="comic__title">{{sc.name}}</p>
           <p class="comic-update">更至：{{sc.latestChapter}}</p>
@@ -44,8 +44,8 @@
         </div>
       </div>
       <div v-for="chapterImg in chapterImgs" :key="chapterImg.id">
-        <img :src="chapterImg.src" @click="showMask()" @load="showImg(chapterImg.id)" style="display: none;" :id="chapterImg.id" class="comic-img">
-        <img src="/static/img/load-img.gif" @click="showMask()" :id="chapterImg.id+'load'" class="load-img">
+        <img :src="chapterImg.src" @click="showMask()" @load="showImg(chapterImg.id)" style="display: none;" :id="chapterImg.id" class="comic-img" alt="加载失败">
+        <img src="/static/img/load-img.gif" @click="showMask()" :id="chapterImg.id+'load'" class="load-img" alt="加载中">
       </div>
     </div>
   </div>
@@ -233,9 +233,6 @@ export default {
 #comicList a:hover {
   font-size: 21px;
 }
-.title {
-  font-size: 25px;
-}
 hr {
   height:2px;
   border:none;
@@ -301,12 +298,12 @@ hr {
   max-width: 100%;
 }
 .left_comic_mask {
-  left: 0px;
+  left: 0;
   width: 30%;
   opacity: 0.6;
 }
 .right_comic_mask {
-  right: 0px;
+  right: 0;
   width: 30%;
   opacity: 0.6;
 }

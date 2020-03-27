@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Tip from '../components/Tip.vue'
 import QRCode from '@/components/QRCode'
-import Star from '@/components/Star'
+import Novel from '@/components/Novel'
 import Doupo from '@/components/Doupo'
 import Encrypt from '@/components/Encrypt'
 import Animation from '@/components/Animation'
@@ -33,9 +33,9 @@ const router = new Router({
       component: Tip
     },
     {
-      path: '/Star',
-      name: 'Star',
-      component: Star,
+      path: '/Novel',
+      name: 'Novel',
+      component: Novel,
       meta: {
         requireAuth: true
       }

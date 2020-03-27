@@ -43,7 +43,7 @@
                 </li>
                 <li><h3>🐋娱乐</h3></li>
                 <li @click="showMenu()">
-                  <router-link to="Star" >我的收藏</router-link>
+                  <router-link to="Novel" >小说</router-link>
                 </li>
                 <li @click="showMenu()">
                   <router-link to="Doupo" >漫画</router-link>
@@ -148,7 +148,7 @@ export default {
 #loading {
   height: 100%;
   width: 100%;
-  z-index: 10002;
+  z-index: 10003;
   position: fixed;
   left: 0px;
   top: 0px;
@@ -381,7 +381,7 @@ img {
   max-width: 90%;
   border: 0px;
   position: fixed;
-  z-index: 100002;
+  z-index: 10002;
   display: none;
   visibility: visible;
   justify-content: center;
