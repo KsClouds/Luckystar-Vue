@@ -230,9 +230,6 @@ export default {
 #comicList a {
   cursor: pointer;
 }
-#comicList a:hover {
-  font-size: 21px;
-}
 hr {
   height:2px;
   border:none;
