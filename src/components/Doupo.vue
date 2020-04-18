@@ -156,6 +156,7 @@ export default {
           _this.chapterImgs = res.data.data
           $('#chapterList').hide()
           $('#chapter').show()
+          document.scrollingElement.scrollTop = 0
         } else {
           _this.kPopup(res.msg)
         }

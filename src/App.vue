@@ -27,34 +27,18 @@
         <div class="sidebar">
           <div class="sidebar-inner">
             <div class="menu-list">
-              <h2>
-                ⭐幸运星&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </h2>
+              <h2>⭐幸运星&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
               <ul class="menu-root">
                 <li><h3>🔧工具</h3></li>
-                <li @click="showMenu()">
-                  <router-link to="Tip" >Tips</router-link>
-                </li>
-                <li @click="showMenu()">
-                  <router-link to="QRCode" >生成二维码</router-link>
-                </li>
-                <li @click="showMenu()">
-                  <router-link to="StudyMaterial" >学习资料</router-link>
-                </li>
+                <li @click="showMenu()"><router-link to="Tip" >Tips</router-link></li>
+                <li @click="showMenu()"><router-link to="QRCode" >生成二维码</router-link></li>
+                <li @click="showMenu()"><router-link to="StudyMaterial" >学习资料</router-link></li>
                 <li><h3>🐋娱乐</h3></li>
-                <li @click="showMenu()">
-                  <router-link to="Novel" >小说</router-link>
-                </li>
-                <li @click="showMenu()">
-                  <router-link to="Doupo" >漫画</router-link>
-                </li>
-                <li @click="showMenu()">
-                  <router-link to="Animation">动画</router-link>
-                </li>
+                <li @click="showMenu()"><router-link to="Novel" >小说</router-link></li>
+                <li @click="showMenu()"><router-link to="Doupo" >漫画</router-link></li>
+                <li @click="showMenu()"><router-link to="Animation">动画</router-link></li>
                 <li><h3>💻CRM</h3></li>
-                <li @click="showMenu()">
-                  <router-link to="Encrypt">加解密</router-link>
-                </li>
+                <li @click="showMenu()"><router-link to="Encrypt">加解密</router-link></li>
               </ul>
             </div>
           </div>

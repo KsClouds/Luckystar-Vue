@@ -1,6 +1,6 @@
 <template>
   <div class="TipView">
-    <h1>Tip</h1>
+    <h1 @click="test">Tip</h1>
     <ul>
       <li>1. 双击漫画可切换章节</li>
       <li>2. ~</li>
@@ -10,7 +10,16 @@
 
 <script>
 export default {
-  name: 'Tip'
+  name: 'Tip',
+  methods: {
+    test () {
+      Notification.requestPermission(function (status) {
+        console.log(status)
+        // eslint-disable-next-line no-new
+        new Notification('title', {body: 'notification body'})
+      })
+    }
+  }
 }
 </script>
 

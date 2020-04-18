@@ -5,20 +5,7 @@
 import axios from 'axios'
 import router from '../router'
 import store from '../store/store'
-import { Toast } from 'vant'
 import $ from 'jquery'
-
-/**
- * 提示函数
- * 禁止点击蒙层、显示一秒后关闭
- */
-const tip = msg => {
-  Toast({
-    message: msg,
-    duration: 1000,
-    forbidClick: true
-  })
-}
 
 /**
  * 跳转登录页
@@ -67,7 +54,7 @@ const errorHandle = (status, other) => {
     // 403 token过期
     // 清除token并跳转登录页
     case 403:
-      tip('登录过期，请重新登录')
+      alert('登录过期，请重新登录')
       localStorage.removeItem('token')
       store.commit('loginSuccess', null)
       setTimeout(() => {
@@ -76,7 +63,7 @@ const errorHandle = (status, other) => {
       break
     // 404请求不存在
     case 404:
-      tip('请求的资源不存在')
+      alert('请求的资源不存在')
       break
     default:
       console.log(other)
