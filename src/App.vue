@@ -71,7 +71,7 @@ export default {
   name: 'app',
   components: {Login},
   created () {
-    var userCode = store.state.userCode ? store.state.userCode : this.generateUUID()
+    var userCode = store.state.userCode
     this.mqttMSG(userCode)
     setTimeout(() => {
       window.L2Dwidget.init({
@@ -111,9 +111,10 @@ export default {
       }
     },
     mqttMSG (userCode) {
+      var uuID = this.generateUUID()
       const options = {
         connectTimeout: 40000,
-        clientId: 'mqttID_' + userCode,
+        clientId: 'mqttID_' + userCode + '_' + uuID,
         clean: true,
         reconnect: true,
         reconnectInterval: 10
