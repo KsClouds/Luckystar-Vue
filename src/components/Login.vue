@@ -105,6 +105,7 @@ export default {
         }
         if (res.code === 0) {
           _this.$store.commit('$_setToken', res.data.token)
+          _this.$store.commit('$_setUserCode', userCode)
           _this.closeLogin()
           window.location.reload()
         } else {

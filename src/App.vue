@@ -57,17 +57,22 @@
       </div>
     </div>
     <!-- content -->
+    <notifications group="foo" />
   </div>
 </template>
 
 <script>
 import $ from 'jquery'
 import Login from '@/components/Login.vue'
+import mqtt from 'mqtt'
+import store from './store/store'
 
 export default {
   name: 'app',
   components: {Login},
   created () {
+    var userCode = store.state.userCode ? store.state.userCode : this.generateUUID()
+    this.mqttMSG(userCode)
     setTimeout(() => {
       window.L2Dwidget.init({
         pluginRootPath: 'static/live2dw/',
@@ -81,12 +86,6 @@ export default {
         log: false
       })
     }, 1000)
-  },
-  data () {
-    return {
-    }
-  },
-  watch: {
   },
   methods: {
     login () {
@@ -110,6 +109,55 @@ export default {
       } else {
         sidebar.addClass('open')
       }
+    },
+    mqttMSG (userCode) {
+      const options = {
+        connectTimeout: 40000,
+        clientId: 'mqttID_' + userCode,
+        clean: true,
+        reconnect: true,
+        reconnectInterval: 10
+      }
+
+      var client = mqtt.connect('ws://111.230.25.75:8083/mqtt', options)
+      // mqtt连接
+      client.on('connect', (e) => {
+        console.log('连接成功:')
+        client.subscribe(['/mqtt/' + userCode, '/mqtt/all'], { qos: 1 }, (error) => {
+          if (!error) {
+            console.log('订阅成功')
+          } else {
+            console.log('订阅失败')
+          }
+        })
+      })
+      // 接收消息处理
+      client.on('message', (topic, message) => {
+        console.log('收到来自', topic, '的消息', message.toString())
+        this.msg = message.toString()
+        this.$notify({
+          group: 'foo',
+          title: 'Important message',
+          text: message.toString()
+        })
+      })
+      // 断开发起重连
+      client.on('reconnect', (error) => {
+        console.log('正在重连:', error)
+      })
+      // 链接异常处理
+      client.on('error', (error) => {
+        console.log('连接失败:', error)
+      })
+    },
+    generateUUID () {
+      var d = new Date().getTime()
+      var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (d + Math.random() * 16) % 16 | 0
+        d = Math.floor(d / 16)
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16)
+      })
+      return uuid
     }
   }
 }

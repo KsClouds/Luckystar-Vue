@@ -1,4 +1,4 @@
-import base from './base'
+import base from '../base'
 import axios from '../http'
 
 const animation = {

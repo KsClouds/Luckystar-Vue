@@ -7,7 +7,8 @@ import kPopup from '../static/js/kPopup.js'
 import '../static/css/style.css'
 import store from './store/store'
 import decryptDes from '../static/js/des.js'
-import api from './http/api' // 导入api接口
+import api from './http' // 导入api接口
+import Notifications from 'vue-notification'
 
 Vue.config.productionTip = false
 Vue.prototype.$store = store
@@ -15,6 +16,7 @@ Vue.prototype.$api = api
 
 Vue.use(kPopup)
 Vue.use(decryptDes)
+Vue.use(Notifications)
 
 /* eslint-disable no-new */
 new Vue({

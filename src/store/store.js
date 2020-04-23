@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const state = { // 全局管理的数据存储
   isLogin: '0',
   ser: null,
+  userCode: document.cookie ? localStorage.userCode : null,
   token: document.cookie ? localStorage.token : '' // token
 }
 
@@ -14,7 +15,10 @@ export default new Vuex.Store({
   getters: { // 监听数据变化的
     getStorage (key) { // 获取本地存储的登录信息
       if (!state.token) {
-        state.token = JSON.parse(localStorage.getItem(key))
+        state.token = JSON.parse(localStorage.getItem('token'))
+      }
+      if (!state.userCode) {
+        state.userCode = JSON.parse(localStorage.getItem('userCode'))
       }
       return state.token
     }
@@ -25,6 +29,11 @@ export default new Vuex.Store({
       localStorage.setItem('token', value)
       console.log(state)
       console.log(value)
+      document.cookie = value
+    },
+    $_setUserCode (state, value) {
+      state.userCode = value
+      localStorage.setItem('userCode', value)
       document.cookie = value
     },
     $_removeStorage (state) { // 删除token
