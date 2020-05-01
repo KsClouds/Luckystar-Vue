@@ -57,11 +57,11 @@
           </div>
         </div>
 
-        <div class="bottom" id="bottom_web" style="display: block;">
-          <a class="link" id="forgetpwd" target="_blank">忘了密码？</a>
-          <span class="dotted">|</span>
-          <a class="link" target="_blank">注册新帐号</a>
-        </div>
+<!--        <div class="bottom" id="bottom_web" style="display: block;">-->
+<!--          <a class="link" id="forgetpwd" target="_blank">忘了密码？</a>-->
+<!--          <span class="dotted">|</span>-->
+<!--          <a class="link" target="_blank">注册新帐号</a>-->
+<!--        </div>-->
       </div>
     </div>
   </div>

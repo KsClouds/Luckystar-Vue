@@ -72,6 +72,9 @@ export default {
   components: {Login},
   created () {
     var userCode = store.state.userCode
+    if (userCode) {
+      setTimeout(() => $('.team').html(userCode))
+    }
     this.mqttMSG(userCode)
     setTimeout(() => {
       window.L2Dwidget.init({
