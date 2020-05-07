@@ -5,6 +5,9 @@
       <li>1. 双击漫画可切换章节</li>
       <li>2. ~</li>
     </ul>
+    <div class="global-footer">
+      <a href="http://www.beian.miit.gov.cn" target="_blank">苏ICP备20022265号-1</a>
+    </div>
   </div>
 </template>
 
@@ -37,5 +40,17 @@ h1, h2 {
   padding: 10px;
   margin-top: 10px;
   position: relative;
+}
+.global-footer {
+  text-align: center;
+  padding: 26px 0;
+  background-color: #2D3E53;
+  font-size: 12px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+.global-footer a {
+  color: #dddddd;
 }
 </style>
