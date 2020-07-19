@@ -32,15 +32,22 @@
       </ul>
     </div>
     <div id='chapter' style="display: none;">
-      <div id="mask" style="display: none;">
-        <div class="left_comic_mask comic_mask" @click="beforeChapter()" @mousewheel.prevent @touchmove.prevent>
-          <p class="comic_btn">上<br>一<br>话<br><br>快<br>捷<br>键<br>←</p>
+      <div id="mask" style="display: none">
+        <div>
+          <div class="top_comic_mask comic_mask_top" @click="reloadChapterImages()" @mousewheel.prevent @touchmove.prevent>
+            <p class="comic_btn">重新获取</p>
+          </div>
         </div>
-        <div class="middle_comic_mask comic_mask" @click="hideMask()" @mousewheel.prevent @touchmove.prevent>
-          <p class="comic_btn">继<br>续<br>观<br>看</p>
-        </div>
-        <div class="right_comic_mask comic_mask" @click="afterChapter()" @mousewheel.prevent @touchmove.prevent>
-          <p class="comic_btn">下<br>一<br>话<br><br>快<br>捷<br>键<br>→</p>
+        <div>
+          <div class="left_comic_mask comic_mask_bottom" @click="beforeChapter()" @mousewheel.prevent @touchmove.prevent>
+            <p class="comic_btn">上<br>一<br>话<br><br>快<br>捷<br>键<br>←</p>
+          </div>
+          <div class="middle_comic_mask comic_mask_bottom" @click="hideMask()" @mousewheel.prevent @touchmove.prevent>
+            <p class="comic_btn">继<br>续<br>观<br>看</p>
+          </div>
+          <div class="right_comic_mask comic_mask_bottom" @click="afterChapter()" @mousewheel.prevent @touchmove.prevent>
+            <p class="comic_btn">下<br>一<br>话<br><br>快<br>捷<br>键<br>→</p>
+          </div>
         </div>
       </div>
       <div v-for="chapterImg in chapterImgs" :key="chapterImg.id">
@@ -94,8 +101,8 @@ export default {
   },
   methods: {
     searchComic () {
-      var _this = this
-      var comicName = $('#comicSearch').val()
+      const _this = this
+      const comicName = $('#comicSearch').val()
       _this.$api.star.searchComic(comicName).then(res => {
         if (res.code === 0) {
           _this.searchComics = res.data
@@ -105,7 +112,7 @@ export default {
       })
     },
     starComic (comicId, comicName, starSource, starSourceCode) {
-      var _this = this
+      const _this = this
       _this.$api.star.starComic(comicId, comicName, starSource, starSourceCode).then(res => {
         if (res.code === 0) {
           _this.kPopup(res.data)
@@ -182,6 +189,22 @@ export default {
       let _this = this
       var curChapterId = _this.curChapter
       _this.$api.star.qryChapterImagesAfter(_this.comic, curChapterId, _this.starSourceCode).then(res => {
+        if (res.code === 0) {
+          $('.comic-img').hide()
+          $('.load-img').show()
+          _this.chapterImgs = []
+          _this.chapterImgs = res.data.data
+          _this.curChapter = res.data.chapterId
+          document.scrollingElement.scrollTop = 0
+        } else {
+          _this.kPopup(res.msg)
+        }
+        _this.hideMask()
+      })
+    },
+    reloadChapterImages () {
+      const _this = this
+      _this.$api.star.reloadChapterImages(_this.comic, _this.curChapter, _this.starSourceCode).then(res => {
         if (res.code === 0) {
           $('.comic-img').hide()
           $('.load-img').show()
@@ -310,9 +333,27 @@ hr {
   width: 40%;
   opacity: 0.7;
 }
-.comic_mask {
+.top_comic_mask {
+  left: 0;
+  width: 100%;
+  opacity: 0.65;
+}
+.comic_mask_bottom {
   position: fixed;
-  height: 100%;
+  height: 85%;
+  bottom: 0;
+  background-color:#000000;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+.comic_mask_top {
+  position: fixed;
+  height: calc(15% - 40px);
+  width: 100%;
+  top: 40px;
   background-color:#000000;
   text-align: center;
   display: -webkit-box;

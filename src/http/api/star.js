@@ -26,6 +26,9 @@ const star = {
   },
   qryChapterImagesAfter (comicId, chapterId, starSourceCode) {
     return axios.get(`${base.luckyStar}/qryChapterImagesAfter?comicId=${comicId}&chapterId=${chapterId}&starSourceCode=${starSourceCode}`)
+  },
+  reloadChapterImages (comicId, chapterId, starSourceCode) {
+    return axios.get(`${base.luckyStar}/reloadChapterImages?comicId=${comicId}&chapterId=${chapterId}&starSourceCode=${starSourceCode}`)
   }
 }
 
