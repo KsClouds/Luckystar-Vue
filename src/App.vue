@@ -209,11 +209,12 @@ export default {
   height: 100%;
   z-index: 10001;
   width: 100%;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   opacity: 0.7;
 }
 .mark {
+  z-index: 10002;
   display: none;
   position: fixed;
   top: 0;

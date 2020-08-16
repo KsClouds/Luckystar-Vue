@@ -84,7 +84,7 @@ export default {
       var userCode = $('#userCode').val()
       var password = $('#password').val()
       if (userCode === '' || password === '') {
-        alert('请输入账号密码')
+        _this.kPopup('请输入账号密码')
         return
       }
       var param = {
@@ -94,7 +94,7 @@ export default {
       param = _this.encryptDes(JSON.stringify(param))
       _this.$api.login.login(param).then(res => {
         if (res == null) {
-          alert('登录失败')
+          _this.kPopup('登录失败')
           $('#loading_tips').attr('style', 'visibility: hidden')
           return
         }
@@ -104,7 +104,7 @@ export default {
           _this.closeLogin()
           window.location.reload()
         } else {
-          alert(res.msg)
+          _this.kPopup(res.msg)
         }
         $('#loading_tips').attr('style', 'visibility: hidden')
       })

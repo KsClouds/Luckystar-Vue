@@ -47,7 +47,7 @@ h1, h2 {
   background-color: #2D3E53;
   font-size: 12px;
   position: fixed;
-  width: 100%;
+  width: 95%;
   bottom: 0;
 }
 .global-footer a {
