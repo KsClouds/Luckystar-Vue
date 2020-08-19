@@ -15,7 +15,7 @@
           <dl>
             <dt>{{ star.starName }}</dt>
             <dd @click="continueRead(star.starCode, star.chapterId, star.starSourceCode)">
-              <p><em>历史：</em><span class="red">{{ star.chapterName }}</span></p>
+              <p><em>历史：</em><span class="blue">{{ star.chapterName }}</span></p>
             </dd>
             <dd><p><em>最新：</em><span class="red">{{ star.latestChapterName }}</span></p></dd>
             <dd><p><em>来源：</em><span class="red">{{ star.starSource }}</span></p></dd>
@@ -253,6 +253,16 @@ export default {
 </script>
 
 <style>
+.comics li {
+  background-color: #EEEEEE;
+  padding: 10px;
+  margin-top: 10px;
+  position: relative;
+}
+.comics ul {
+  list-style-type: none;
+  padding-left: 0;
+}
 #comicList a {
   cursor: pointer;
 }
@@ -379,6 +389,7 @@ hr {
   overflow: hidden;
   border: 1px solid #CEE7FF;
   margin: 6px;
+  min-width: 300px;
 }
 #comicList li p {
   margin-block: 0;
@@ -386,7 +397,7 @@ hr {
 .fl {
   position: relative;
   display: block;
-  width: 130px;
+  width: 120px;
   float: left;
 }
 .fi a {
@@ -421,12 +432,14 @@ a.pic img {
   display: inline;
   background-color: transparent;
   color: #FFF;
+  white-space: nowrap;
 }
 em {
   font-style: normal;
 }
 #comicList dl {
   float: left;
+  max-width: 200px;
 }
 #comicList dt {
   height: 30px;
@@ -438,5 +451,8 @@ em {
 }
 .red {
   color: #F00;
+}
+.blue {
+  color: #00F;
 }
 </style>
