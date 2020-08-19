@@ -4,10 +4,22 @@
       <h4>收藏的漫画</h4>
       <ul>
         <li v-for="star in stars" :key="star.starCode">
-          <a>{{ star.starName }} <br> 历史：{{ star.chapterName }} <br> 最新：{{ star.latestChapterName }}</a>
-          <button class="oper-btn continue-read" @click="continueRead(star.starCode, star.chapterId, star.starSourceCode)">继续观看</button>
-          <button class="oper-btn qry-chapter" @click="chooseComic(star.starCode, star.starSourceCode)">查看目录</button>
-          <button class="oper-btn cancel-star" @click="starComic(star.starCode, star.starName, star.starSource, star.starSourceCode)">取消收藏</button>
+          <p class="fl">
+            <a class="pic">
+              <img :src=star.starImage :alt=star.starName @click="chooseComic(star.starCode, star.starSourceCode)">
+            </a>
+            <span>
+              <a class="yellow">{{ star.latestChapterName }}</a>
+            </span>
+          </p>
+          <dl>
+            <dt>{{ star.starName }}</dt>
+            <dd @click="continueRead(star.starCode, star.chapterId, star.starSourceCode)">
+              <p><em>历史：</em><span class="red">{{ star.chapterName }}</span></p>
+            </dd>
+            <dd><p><em>最新：</em><span class="red">{{ star.latestChapterName }}</span></p></dd>
+            <dd><p><em>来源：</em><span class="red">{{ star.starSource }}</span></p></dd>
+          </dl>
         </li>
       </ul>
       <hr/>
@@ -15,7 +27,7 @@
       <label><input id="comicSearch" type="text" class="search-query" style="width: 90%; margin-bottom: 15px;" @keyup.enter="searchComic" placeholder="输入漫画名"></label>
       <div class="search-comic-list">
         <div v-for="sc in searchComics" :key="sc.comicId" class="common-comic-item">
-          <a class="cover" @click="starComic(sc.comicId, sc.name, sc.starSource, sc.starSourceCode)">
+          <a class="cover" @click="starComic(sc.comicId, sc.name, sc.starSource, sc.starSourceCode, sc.src)">
             <img :src=sc.src alt="封面加载失败">
           </a>
           <p class="comic__title">{{sc.name}}</p>
@@ -111,9 +123,9 @@ export default {
         }
       })
     },
-    starComic (comicId, comicName, starSource, starSourceCode) {
+    starComic (comicId, comicName, starSource, starSourceCode, starImage) {
       const _this = this
-      _this.$api.star.starComic(comicId, comicName, starSource, starSourceCode).then(res => {
+      _this.$api.star.starComic(comicId, comicName, starSource, starSourceCode, starImage).then(res => {
         if (res.code === 0) {
           _this.kPopup(res.data)
           window.location.reload()
@@ -241,16 +253,6 @@ export default {
 </script>
 
 <style>
-.comics li {
-  background-color: #EEEEEE;
-  padding: 10px;
-  margin-top: 10px;
-  position: relative;
-}
-.comics ul {
-  list-style-type: none;
-  padding-left: 0;
-}
 #comicList a {
   cursor: pointer;
 }
@@ -270,6 +272,7 @@ hr {
   line-height: 18px;
   color: #999;
   width: 180px;
+  height: 300px;
   margin-right: 20px;
   max-width: 40%;
 }
@@ -364,17 +367,76 @@ hr {
 .comic_btn {
   color: #FFFFFF;
 }
-.oper-btn {
+
+#comicList ul {
+  padding-left: 0;
+}
+#comicList li {
+  font-size: 12px;
+  height: 170px;
+  padding: 10px 20px 10px 20px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #CEE7FF;
+  margin: 6px;
+}
+#comicList li p {
+  margin-block: 0;
+}
+.fl {
+  position: relative;
+  display: block;
+  width: 130px;
+  float: left;
+}
+.fi a {
+  padding: 4px;
+  border: 1px solid #CCC;
+  display: block;
+  width: 120px;
+  height: 150px;
+  background-color: #FFF;
+}
+a.pic img {
+  width: 120px;
+  height: 150px;
+  border: none;
+}
+.fl span {
   position: absolute;
-  right: 10px;
+  width: 112px;
+  height: 20px;
+  display: block;
+  top: 130px;
+  text-align: right;
+  line-height: 20px;
+  color: #FFF;
+  background: url(../../static/img/status_bg.png) top right no-repeat;
+  padding-right: 8px;
+  _background: transparent;
 }
-.continue-read {
-  top: 1px;
+.fl span a {
+  padding: 0;
+  border: none;
+  display: inline;
+  background-color: transparent;
+  color: #FFF;
 }
-.qry-chapter {
-  top: 24px;
+em {
+  font-style: normal;
 }
-.cancel-star {
-  top: 47px;
+#comicList dl {
+  float: left;
+}
+#comicList dt {
+  height: 30px;
+}
+#comicList dd {
+  margin: 0;
+  padding: 0;
+  height: 20px;
+}
+.red {
+  color: #F00;
 }
 </style>

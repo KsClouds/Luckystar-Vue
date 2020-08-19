@@ -6,8 +6,8 @@ const star = {
   searchComic (comicName) {
     return axios.get(`${base.luckyStar}/searchComic?comicName=${comicName}`)
   },
-  starComic (comicId, comicName, starSource, starSourceCode) {
-    return axios.get(`${base.luckyStar}/starComic?comicId=${comicId}&comicName=${comicName}&starSource=${starSource}&starSourceCode=${starSourceCode}`)
+  starComic (comicId, comicName, starSource, starSourceCode, starImage) {
+    return axios.get(`${base.luckyStar}/starComic?comicId=${comicId}&comicName=${comicName}&starSource=${starSource}&starSourceCode=${starSourceCode}&starImage=${starImage}`)
   },
   qryStars () {
     return axios.get(`${base.luckyStar}/qryStars`)
