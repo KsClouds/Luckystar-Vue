@@ -7,6 +7,7 @@ import Doupo from '@/components/Doupo'
 import Encrypt from '@/components/Encrypt'
 import Animation from '@/components/Animation'
 import StudyMaterial from '@/components/StudyMaterial'
+import NovelStar from '@/components/NovelStar'
 
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ const router = new Router({
       meta: {
         requireAuth: true
       }
+    },
+    {
+      path: '/NovelStar',
+      name: 'NovelStar',
+      component: NovelStar
     },
     {
       path: '/Doupo',

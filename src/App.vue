@@ -34,7 +34,8 @@
                 <li @click="showMenu()"><router-link to="QRCode" >生成二维码</router-link></li>
                 <li @click="showMenu()"><router-link to="StudyMaterial" >学习资料</router-link></li>
                 <li><h3>🐋娱乐</h3></li>
-                <li @click="showMenu()"><router-link to="Novel" >小说</router-link></li>
+                <li @click="showMenu()"><router-link to="Novel" >龙族</router-link></li>
+                <li @click="showMenu()"><router-link to="NovelStar" >小说</router-link></li>
                 <li @click="showMenu()"><router-link to="Doupo" >漫画</router-link></li>
                 <li @click="showMenu()"><router-link to="Animation">动画</router-link></li>
                 <li><h3>💻CRM</h3></li>
@@ -64,7 +65,7 @@
 <script>
 import $ from 'jquery'
 import Login from '@/components/Login.vue'
-import mqtt from 'mqtt'
+// import mqtt from 'mqtt'
 import store from './store/store'
 
 export default {
@@ -114,45 +115,45 @@ export default {
       }
     },
     mqttMSG (userCode) {
-      var uuID = this.generateUUID()
-      const options = {
-        connectTimeout: 40000,
-        clientId: 'mqttID_' + userCode + '_' + uuID,
-        clean: true,
-        reconnect: true,
-        reconnectInterval: 10
-      }
+      // var uuID = this.generateUUID()
+      // const options = {
+      //   connectTimeout: 40000,
+      //   clientId: 'mqttID_' + userCode + '_' + uuID,
+      //   clean: true,
+      //   reconnect: true,
+      //   reconnectInterval: 10
+      // }
 
-      var client = mqtt.connect('ws://111.230.25.75:8083/mqtt', options)
-      // mqtt连接
-      client.on('connect', (e) => {
-        console.log('连接成功:')
-        client.subscribe(['/mqtt/' + userCode, '/mqtt/all'], { qos: 1 }, (error) => {
-          if (!error) {
-            console.log('订阅成功')
-          } else {
-            console.log('订阅失败')
-          }
-        })
-      })
-      // 接收消息处理
-      client.on('message', (topic, message) => {
-        console.log('收到来自', topic, '的消息', message.toString())
-        this.msg = message.toString()
-        this.$notify({
-          group: 'foo',
-          title: 'Important message',
-          text: message.toString()
-        })
-      })
-      // 断开发起重连
-      client.on('reconnect', (error) => {
-        console.log('正在重连:', error)
-      })
-      // 链接异常处理
-      client.on('error', (error) => {
-        console.log('连接失败:', error)
-      })
+      // var client = mqtt.connect('ws://111.230.25.75:8083/mqtt', options)
+      // // mqtt连接
+      // client.on('connect', (e) => {
+      //   console.log('连接成功:')
+      //   client.subscribe(['/mqtt/' + userCode, '/mqtt/all'], { qos: 1 }, (error) => {
+      //     if (!error) {
+      //       console.log('订阅成功')
+      //     } else {
+      //       console.log('订阅失败')
+      //     }
+      //   })
+      // })
+      // // 接收消息处理
+      // client.on('message', (topic, message) => {
+      //   console.log('收到来自', topic, '的消息', message.toString())
+      //   this.msg = message.toString()
+      //   this.$notify({
+      //     group: 'foo',
+      //     title: 'Important message',
+      //     text: message.toString()
+      //   })
+      // })
+      // // 断开发起重连
+      // client.on('reconnect', (error) => {
+      //   console.log('正在重连:', error)
+      // })
+      // // 链接异常处理
+      // client.on('error', (error) => {
+      //   console.log('连接失败:', error)
+      // })
     },
     generateUUID () {
       var d = new Date().getTime()

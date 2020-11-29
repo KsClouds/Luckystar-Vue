@@ -7,6 +7,7 @@ import qrcode from '@/http/api/qrcode'
 import animation from '@/http/api/animation'
 import studyMaterial from '@/http/api/studyMaterial'
 import novel from '@/http/api/novel'
+import novelStar from '@/http/api/novelStar'
 
 // 导出接口
 export default {
@@ -15,5 +16,6 @@ export default {
   qrcode,
   animation,
   studyMaterial,
-  novel
+  novel,
+  novelStar
 }
