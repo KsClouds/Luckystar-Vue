@@ -62,9 +62,9 @@
           </div>
         </div>
       </div>
-      <div v-for="chapterImg in chapterImgs" :key="chapterImg.id">
-        <img :src="chapterImg.src" @click="showMask()" @load="showImg(chapterImg.id)" style="display: none;" :id="chapterImg.id" class="comic-img" alt="加载失败">
-        <img src="/static/img/load-img.gif" @click="showMask()" :id="chapterImg.id+'load'" class="load-img" alt="加载中">
+      <div v-for="(chapterImg, index) in chapterImgs" :key="index">
+        <img :src="chapterImg.src" @click="showMask()" @load="showImg(index)" style="display: none;" :id="index" class="comic-img" alt="加载失败">
+        <img src="/static/img/load-img.gif" @click="showMask()" :id="index+'load'" class="load-img" alt="加载中">
       </div>
     </div>
   </div>
