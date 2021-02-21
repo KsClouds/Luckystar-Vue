@@ -8,6 +8,7 @@ import animation from '@/http/api/animation'
 import studyMaterial from '@/http/api/studyMaterial'
 import novel from '@/http/api/novel'
 import novelStar from '@/http/api/novelStar'
+import red from '@/http/api/red'
 
 // 导出接口
 export default {
@@ -17,5 +18,6 @@ export default {
   animation,
   studyMaterial,
   novel,
-  novelStar
+  novelStar,
+  red
 }

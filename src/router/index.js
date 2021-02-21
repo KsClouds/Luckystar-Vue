@@ -8,6 +8,7 @@ import Encrypt from '@/components/Encrypt'
 import Animation from '@/components/Animation'
 import StudyMaterial from '@/components/StudyMaterial'
 import NovelStar from '@/components/NovelStar'
+import Red from '@/components/Red'
 
 Vue.use(Router)
 
@@ -68,6 +69,11 @@ const router = new Router({
       meta: {
         requireAuth: true
       }
+    },
+    {
+      path: '/Red',
+      name: 'Red',
+      component: Red
     }
   ]
 })

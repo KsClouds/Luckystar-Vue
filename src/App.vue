@@ -40,6 +40,8 @@
                 <li @click="showMenu()"><router-link to="Animation">动画</router-link></li>
                 <li><h3>💻CRM</h3></li>
                 <li @click="showMenu()"><router-link to="Encrypt">加解密</router-link></li>
+                <li><h3>💫Demo</h3></li>
+                <li @click="showMenu()"><router-link to="Red">Demo</router-link></li>
               </ul>
             </div>
           </div>

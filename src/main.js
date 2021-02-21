@@ -9,7 +9,9 @@ import store from './store/store'
 import decryptDes from '../static/js/des.js'
 import api from './http' // 导入api接口
 import Notifications from 'vue-notification'
+import redTaskProcess from './components/RedTaskProcess.vue'
 
+Vue.component('App-RedTaskProcess', redTaskProcess)
 Vue.config.productionTip = false
 Vue.prototype.$store = store
 Vue.prototype.$api = api
