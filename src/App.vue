@@ -15,11 +15,6 @@
           <img src="./assets/amy.gif">
           <span>らき☆すた</span>
         </a>
-        <ul id="nav">
-          <li>
-            <a class="nav-link team" @click='login()'>登录</a>
-          </li>
-        </ul>
       </div>
       <!-- main page start -->
       <div id='main' class='fix-sidebar'>
