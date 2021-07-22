@@ -24,10 +24,7 @@ const router = new Router({
     {
       path: '/QRCode',
       name: 'QRCode',
-      component: QRCode,
-      meta: {
-        requireAuth: true
-      }
+      component: QRCode
     },
     {
       path: '/Tip',
@@ -37,10 +34,7 @@ const router = new Router({
     {
       path: '/Novel',
       name: 'Novel',
-      component: Novel,
-      meta: {
-        requireAuth: true
-      }
+      component: Novel
     },
     {
       path: '/NovelStar',
@@ -65,10 +59,10 @@ const router = new Router({
     {
       path: '/StudyMaterial',
       name: 'StudyMaterial',
-      component: StudyMaterial,
-      meta: {
-        requireAuth: true
-      }
+      component: StudyMaterial
+      // meta: {
+      //   requireAuth: true
+      // }
     },
     {
       path: '/Red',
