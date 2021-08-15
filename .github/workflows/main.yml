@@ -60,6 +60,7 @@ jobs:
         password: ${{ secrets.SSH_PWD }}
         port: 22
         script: |
+          mkdir /luckystar
           cd /luckystar
           rm -rf dist
           rm -rf webapp.tar.gz
